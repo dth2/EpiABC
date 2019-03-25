@@ -99,12 +99,19 @@ abc_smc_wave <- function(input = "data/",
 
     # fixed params/settings
     model <- input$model
+    model
     prior <- input$prior
+    prior
     prior_test <- input$prior_test
+    prior_test
     nsims <- input$nsims
+    nsims
     summary_stat_target <- input$summary_stat_target
+    summary_stat_target
     ncores <- input$ncores
+    ncores
     alpha <- input$alpha
+    alpha
 
     seed_count <- 0
     input$inside_prior <- TRUE
@@ -127,7 +134,7 @@ abc_smc_wave <- function(input = "data/",
                          batch = batch)
 
     out <- list(init = input, seed_count = seed_count, tab_ini = tab_ini)
-
+    out
     if (save == TRUE) {
       saveRDS(out, file = paste0(outdir, "abc.wave0.batch",
                                  stringr::str_pad(batch, 4, pad = "0"), ".rda"))
@@ -169,12 +176,18 @@ abc_smc_process <- function(input = "data/", wave, save = TRUE, outdir = "data/"
 
     # fixed
     prior <- input$init$prior
+    prior
     n_alpha <- input$init$n_alpha
+    n_alpha
     nparam <- input$init$nparam
+    nparam
     nstat <- input$init$nstat
+    nstat
     nsims <- input$init$nsims
     nsims_step <- input$init$nsims_step
+    nsims_step
     summary_stat_target <- input$init$summary_stat_target
+    summary_stat_target
     alpha <- input$init$alpha
     dist_weights <- input$init$dist_weights
     inside_prior <- input$init$inside_prior
@@ -531,12 +544,14 @@ abc_wave0 <- function(model,
 
   debug(makeCluster)
   cl <- makeCluster(ncores)
+  cl
   debug(parLapplyLB)
   list_simul_summarystat <- parLapplyLB(cl, list_param, model)
+  list_simul_summarystat 
   stopCluster(cl)
 
   tab_simul_summarystat <- do.call("rbind", list_simul_summarystat)
-
+  tab_simul_summarystat
   options(scipen = 0)
 
   out <- cbind(tab_param, tab_simul_summarystat)
