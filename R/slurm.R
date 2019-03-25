@@ -529,8 +529,9 @@ abc_wave0 <- function(model,
     tab_param <- tab_param[simset, , drop = FALSE]
   }
 
-  cl <- makeCluster(ncores,
-                   outfile = "out/")
+  debug(makeCluster)
+  cl <- makeCluster(ncores)
+  debug(parLapplyLB)
   list_simul_summarystat <- parLapplyLB(cl, list_param, model)
   stopCluster(cl)
 
@@ -562,8 +563,7 @@ abc_waveN <- function(input, batch) {
   }
 
   cl <- 
-  Cluster(ncores,
-         outfile = "out/")
+  Cluster(ncores)
   list_simul_summarystat = parLapplyLB(cl, list_param, model)
   stopCluster(cl)
 
