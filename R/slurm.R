@@ -529,7 +529,7 @@ abc_wave0 <- function(model,
     tab_param <- tab_param[simset, , drop = FALSE]
   }
 
-  debug(makeCLuster)
+  debug(makeCluster)
   cl <- makeCluster(ncores)
   if (!is.null(cl))
     message("Passing makeCluster(ncores)")
