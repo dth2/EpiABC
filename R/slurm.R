@@ -535,6 +535,7 @@ abc_wave0 <- function(model,
     message("Passing makeCluster(ncores)")
   
   debug(parLapplyLB)
+  debug(clusterApplyLB)
   list_simul_summarystat <- parLapplyLB(cl, list_param, model)
     if (!is.null(list_simul_summarystat))
     message("Passing parLapplyLB(cl, list_param, model)")
