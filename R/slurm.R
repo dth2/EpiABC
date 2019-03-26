@@ -127,7 +127,7 @@ abc_smc_wave <- function(input = "data/",
                          batch = batch)
 
     out <- list(init = input, seed_count = seed_count, tab_ini = tab_ini)
-    
+
     if (save == TRUE) {
       saveRDS(out, file = paste0(outdir, "abc.wave0.batch",
                                  stringr::str_pad(batch, 4, pad = "0"), ".rda"))
@@ -527,23 +527,14 @@ abc_wave0 <- function(model,
     simset <- batch_to_sims(ncores, batch, nsims)
     list_param <- list_param[simset]
     tab_param <- tab_param[simset, , drop = FALSE]
-    print(list_param)
-    print(tab_param)
   }
 
-  debug(makeCluster)
   cl <- makeCluster(ncores)
-  print(cl)
-  debug(parLapplyLB)
-  print(cl)
-  print(list_param)
-  print(model)
   list_simul_summarystat <- parLapplyLB(cl, list_param, model)
-  print(list_simul_summarystat) 
   stopCluster(cl)
 
   tab_simul_summarystat <- do.call("rbind", list_simul_summarystat)
-  print(tab_simul_summarystat)
+
   options(scipen = 0)
 
   out <- cbind(tab_param, tab_simul_summarystat)
@@ -569,8 +560,7 @@ abc_waveN <- function(input, batch) {
     tab_param <- tab_param[simset, , drop = FALSE]
   }
 
-  cl <- 
-  Cluster(ncores)
+  cl <- makeCluster(ncores)
   list_simul_summarystat = parLapplyLB(cl, list_param, model)
   stopCluster(cl)
 
