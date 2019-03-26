@@ -536,7 +536,6 @@ abc_wave0 <- function(model,
   
   debug(parLapplyLB)
   debug(clusterApplyLB)
-  debug(dynamicClusterApply)
   list_simul_summarystat <- parLapplyLB(cl, list_param, model)
     if (!is.null(list_simul_summarystat))
     message("Passing parLapplyLB(cl, list_param, model)")
