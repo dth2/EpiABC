@@ -531,15 +531,20 @@ abc_wave0 <- function(model,
 
   debug(makeCLuster)
   cl <- makeCluster(ncores)
-  print(cl)
-  print(list_param)
-  print(model)
+  if (!NULL(cl))
+    message("Passing makeCluster(ncores)")
+  
   debug(parLapplyLB)
   list_simul_summarystat <- parLapplyLB(cl, list_param, model)
+    if (!NULL(list_simul_summarystat))
+    message("Passing parLapplyLB(cl, list_param, model)")
+  
   stopCluster(cl)
 
   tab_simul_summarystat <- do.call("rbind", list_simul_summarystat)
-
+    if (!NULL(tab_simul_summarystat))
+    message("Passing do.call(rbind, list_simul_summarystat)")
+  
   options(scipen = 0)
 
   out <- cbind(tab_param, tab_simul_summarystat)
